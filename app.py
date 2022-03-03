@@ -110,7 +110,7 @@ plt.show()
 
 """## plotly"""
 
-!pip install jupyter-dash -q
+
 
 import plotly.express as px
 
