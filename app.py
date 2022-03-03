@@ -9,9 +9,8 @@ Original file is located at
 ## Import libraries and dataset
 """
 
-!pip install jupyter-dash -q
-
-!pip install dash==2.0.0
+import dash
+import dash_auth
 
 from jupyter_dash import JupyterDash
 import dash_core_components as dcc
@@ -22,7 +21,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+USERNAME_PASSWORD_PAIRS=[['guvi','guvi']]
+app=dash.Dash(__name__)
+auth= dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
+server=app.server
 
 df=pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 
@@ -849,12 +851,12 @@ fig1.show()
 
 """##dash"""
 
-app = JupyterDash(__name__)
+
 server=app.server
 
 from dash.dependencies import Input, Output
 
-app=JupyterDash()
+
 app.layout=html.Div([
                      
    html.H1(children='Hello Fan!!!',
