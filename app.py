@@ -183,6 +183,29 @@ fig34.show()
 """###4-->Luckiest venue for each team(n-teams count - plots for each team(how
 ###much played vs how much won))
 """
+def favorite(team):
+  df=ipl
+  #team='Chennai Super Kings'
+  df1=df[df['winner']==team]
+  df2=pd.DataFrame(df1[['winner','venue']])#.sort_index(ascending=True)
+  venue=list()
+  lst=list()
+  for i in df2['venue'].unique():
+    venue.append(i)
+  venue=sorted(venue)
+
+  x=df2['venue'].value_counts().sort_index(ascending=True)
+  y=x.shape
+  for i in range(y[0]):
+    lst.append(x[i])
+
+  df_team=pd.DataFrame({"venue":venue,"win_count":lst})
+
+  fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title="Win count at each stadium ")
+  return fig411
+
+
+
 
 df=ipl
 
@@ -307,6 +330,30 @@ df=win_percent_toss
 fig1=px.bar(df,x=df['Team'],y='Win_match_toss_%',color='no:times toss won')
 fig1.show()
 
+x=ipl['season'].unique()
+x=sorted(x)
+
+import plotly.graph_objects as go
+win=(3,1,0,0,0,0,0,2,4,0,1,0,0,1)
+df=win_percent_toss
+fig_stats = go.Figure(data=[go.Table
+                          (
+                        header=dict(values=['Team', 'Total_matches(All_Seasons','Total_Wins(All_Seasons','N0: of IPL Trophies won'],
+                                     font=dict(color='whitesmoke', size=18),
+                                    line_color='black',
+                                    fill_color='#19388A',
+                                    height=50),
+                        cells=dict(values=[df['Team'], df['Total_matches_played'],df['Total_matches_won'],win],
+                                   font=dict(color='white', size=12),
+                                    line_color='black',
+                                    fill_color='#4F91CD',
+                                   height=30)
+                        )
+                     ])
+
+
+
+
 """##dash"""
 USERNAME_PASSWORD_PAIRS=[['guvi','guvi']]
 app=dash.Dash(__name__)
@@ -326,34 +373,58 @@ app.layout=html.Div([
        Welcome to the IPL Analysis:.
    ''',
    style={"textAlign": "center",
-          'color':'#00FF7F'
+          'color':'#E6E6FA',
+          'background-color':'#7B68EE'
    }),
    html.Div([
    #html.Label("Please select any option"),
         dcc.Dropdown(
          id='FirstDropdown',
          options=[
-                {'label':"Best teams based on winning count(1 plot)",'value':'v1'},
-                {'label':"Best player based on player of the match(1 plot)",'value':'v2'},
-                {'label':"best winning teams based on the win by runs and win by wickets",'value':'v3'},
-                {'label':"Luckiest venue for each team)",'value':'v4'},
-                {'label':"probability of winning matches vs winning toss",'value':'v5'}
+                {'label':"1.IPL stats from 2008-2019",'value':'v'},
+                {'label':"2. Best teams based on winning count",'value':'v1'},
+                {'label':"3. Best player based on player of the match",'value':'v2'},
+                {'label':"4. Best winning teams based on the win by runs and win by wickets",'value':'v3'},
+                {'label':"5. Luckiest venue for each team)",'value':'v4'},
+                {'label':"6. Probability of winning matches vs winning toss",'value':'v5'}
                   
          ],
          placeholder="Please choose an option",
-         value='v1'
-         ),
-         html.Div(dcc.Graph(id='graph'))
+         value='v'
+         )
+   ]),
+         html.Br(),
+         html.Label('Please select this dropdown only for option 5'),
+  html.Div([dcc.Dropdown(
+              id='Teams',
+              options=[{'label':'Chennai Super Kings','value':'Chennai Super Kings'},{'label':'Deccan Chargers','value':'Deccan Chargers'},
+                       {'label':'Delhi Capitals','value':'Delhi Capitals'},{'label':'Delhi Daredevils','value':'Delhi Daredevils'},
+                       {'label':'Gujarat Lions','value':'Gujarat Lions'},{'label':'Kings XI Punjab','value':'Kings XI Punjab'},
+                       {'label':'Kochi Tuskers Kerala','value':'Kochi Tuskers Kerala'},{'label':'Kolkata Knight Riders','value':'Kolkata Knight Riders'},
+                       {'label':'Mumbai Indians','value':'Mumbai Indians'},{'label':'Pune Warriors','value':'Pune Warriors'},
+                        {'label':'Rajasthan Royals','value':'Rajasthan Royals'},{'label':'Rising Pune Supergiants','value':'Rising Pune Supergiants'},
+                       {'label':'Royal Challengers Bangalore','value':'Royal Challengers Bangalore'},
+                       {'label':'Sunrisers Hyderabad','value':'Sunrisers Hyderabad'}
+                       ],
+                      placeholder="Please choose an option",
+                    value='Chennai Super Kings'
+                  )
+  ]),
+         html.Div([
+             dcc.Graph(id='graph')
    ])
                                       
 ])
 
 @app.callback(
     Output('graph','figure'),
-    [Input(component_id='FirstDropdown',component_property='value')]
+    [Input('FirstDropdown','value')],[Input('Teams','value')]
+    
 )
-def select_graph(value):
+def select_graph(value,value1):
 
+  if value=='v':
+    return fig_stats
   if value=='v1':
     return fig11
   elif value=='v2':
@@ -361,9 +432,13 @@ def select_graph(value):
   elif value=='v3':
     return fig31
   elif value=='v4':
-    return fig411
+    team=str(value1)
+    fig=favorite(team)
+    return fig
   else:
     return fig_all
+
+
 
 if __name__ == '__main__':
    app.run_server(debug=True)
