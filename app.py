@@ -385,7 +385,7 @@ app.layout=html.Div([
                 {'label':"2. Best teams based on winning count",'value':'v1'},
                 {'label':"3. Best player based on player of the match",'value':'v2'},
                 {'label':"4. Best winning teams based on the win by runs and win by wickets",'value':'v3'},
-                {'label':"5. Luckiest venue for each team)",'value':'v4'},
+                {'label':"5. Luckiest venue for each team",'value':'v4'},
                 {'label':"6. Probability of winning matches vs winning toss",'value':'v5'}
                   
          ],
@@ -394,7 +394,7 @@ app.layout=html.Div([
          )
    ]),
          html.Br(),
-         html.Label('Please select this dropdown only for option 5'),
+         html.Label('Please select this dropdown only for option 5--(Luckiest venue for each team)'),
   html.Div([dcc.Dropdown(
               id='Teams',
               options=[{'label':'Chennai Super Kings','value':'Chennai Super Kings'},{'label':'Deccan Chargers','value':'Deccan Chargers'},
