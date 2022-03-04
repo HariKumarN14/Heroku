@@ -1,0 +1,372 @@
+
+import pandas as pd
+import numpy as np
+
+import dash
+import dash_auth
+import plotly.express as px
+from jupyter_dash import JupyterDash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+
+df=pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
+
+"""## Cleaning"""
+
+df1=df.drop(['id','umpire1','umpire2','umpire3'],axis=1)   #no need for id since index is there and id is wrong also
+df1.info()                                                # no need of umpire data for analysis. do dropping these columns
+
+c1=df1[df1['city'].isnull()]                    #checking the nan values
+c1
+
+df1['city']=df1['city'].fillna('Dubai')                #the  null values all belong to same venue, so easily fill the city wit  venue name
+
+temp=df1.groupby('city')['venue']                    #check if filled values are reflecting
+temp.first()
+
+c2=df1[df1['winner'].isnull()]
+c2
+
+df2=df1.dropna(subset=['winner'])       #dropping the data where result/winner is na. no point in filling those with 0
+df2.info()
+
+df2.isna().sum()              #checking there no nan values present
+
+df2['city'].unique()
+
+df2['city'].value_counts()
+
+mappings={'Bangalore':'Bangalore','Bengaluru':'Bangalore'}
+df2['city']=df2['city'].replace(mappings)
+df2['city'].unique()
+
+mappings={'Rising Pune Supergiant':'Rising Pune Supergiants'}
+df2['team1']=df2['team1'].replace(mappings)
+df2['team2']=df2['team2'].replace(mappings)
+df2['winner']=df2['winner'].replace(mappings)
+df2['toss_winner']=df2['toss_winner'].replace(mappings)
+print(df2['team1'].unique())
+#print(df2['team2'].unique())
+#print(df2['winner'].unique())
+
+df2['venue'].unique()
+
+df2['venue'].unique()
+
+mappings={'M. Chinnaswamy Stadium':'M Chinnaswamy Stadium','MA Chidambaram Stadium, Chepauk':'M. A. Chidambaram Stadium'
+          ,'Punjab Cricket Association IS Bindra Stadium, Mohali':'Punjab Cricket Association Stadium, Mohali'}
+
+df2['venue']=df2['venue'].replace(mappings)
+
+df2['dl_applied'].value_counts()
+
+df2['date']=pd.to_datetime(df2['date'])
+df2.info()
+
+ipl=df2
+ipl  #cleaned dataset
+
+"""## plotly
+
+###1-->Best teams based on winning count(1 plot)
+"""
+
+df=ipl
+
+x=df['winner'].value_counts().sort_index(ascending=True)
+x
+
+y=df['winner'].unique()
+y=sorted(y)
+y
+
+lst=list()
+for i in range(14):
+  lst.append(x[i])
+lst
+
+x2=df['team1'].value_counts().sort_index(ascending=True)
+
+x3=df['team2'].value_counts().sort_index(ascending=True)
+
+lst2=list()
+for i in range(14):
+  temp=x2[i]+x3[i]
+  lst2.append(temp)
+
+print(lst2)
+
+winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})         #creating new dataframe with wincounts
+winner_list
+
+fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig11.show()
+
+
+
+fig12=px.scatter(winner_list,x="Team",y="Win_count",size="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig12.show()
+
+fig13= px.pie(winner_list, values="Win_count",names="Team",color="Total_matches",title="Win Count of All teams across all seasons",)
+fig13.show()
+
+fig14= px.sunburst(winner_list, path=['Win_count', 
+                            'Total_matches',
+                            'Team'], 
+                  values='Win_count')
+fig14.show()
+
+
+
+"""###2-->Best player based on player of the match(1 plot)"""
+
+df.head()
+
+x=df['player_of_match'].value_counts().sort_index(ascending=True)
+x.shape
+
+fig21=px.histogram(df,x="player_of_match",color='player_of_match')
+fig21.show()
+
+
+
+"""###3-->find best winning teams based on the win by runs and win by wickets
+###(2 plots (winning team vs win by runs and winning team vs win by wickets))
+"""
+
+#creating the unique list of winners
+df=ipl 
+lst=list()
+for i in df['winner'].unique():
+  lst.append(i)
+lst=sorted(lst)
+print(lst)
+
+#creating a dateframe with each team and their maximum win by runs and wickets
+max_runs=list()
+max_wickets=list()
+
+for i in lst:
+  x=df[df['winner']==i]
+  max_value=x.max()
+  
+  max_runs.append(max_value['win_by_runs'])
+  max_wickets.append(max_value['win_by_wickets'])
+
+win_list=pd.DataFrame({"Team":lst,"MAX_win_by_runs":max_runs,"MAX_win_by_wickets":max_wickets})
+win_list
+
+"""####Best team by win by most runs"""
+
+fig31=px.bar(win_list,x="Team",y="MAX_win_by_runs",color="Team",title="Max runs by which each team has won")
+fig31.show()
+
+fig32= px.sunburst(win_list, path=['MAX_win_by_wickets', 
+                            'MAX_win_by_runs',
+                            'Team'], 
+                  title="Max wickets by which each team has won"
+                  )
+fig32.show()
+
+"""####Best team by win by most wickets"""
+
+fig33=px.bar(win_list,x="Team",y="MAX_win_by_wickets",color="Team",title="Max wickets by which each team has won")
+fig33.show()
+
+fig34= px.sunburst(win_list, path=['MAX_win_by_wickets', 
+                            'MAX_win_by_runs',
+                            'Team'], 
+                  )
+fig34.show()
+
+"""###4-->Luckiest venue for each team(n-teams count - plots for each team(how
+###much played vs how much won))
+"""
+
+df=ipl
+
+lst=list()
+for i in df['winner'].unique():
+  lst.append(i)
+lst=sorted(lst)
+print(lst)
+
+"""#####1.Best venue """
+
+#Best venue for Chennai Super Kings
+
+#team=input()
+team='Chennai Super Kings'
+df1=df[df['winner']==team]
+df1
+df2=pd.DataFrame(df1[['winner','venue']])#.sort_index(ascending=True)
+df2
+venue=list()
+lst=list()
+for i in df2['venue'].unique():
+  venue.append(i)
+
+venue=sorted(venue)
+
+x=df2['venue'].value_counts().sort_index(ascending=True)
+y=x.shape
+for i in range(y[0]):
+  lst.append(x[i])
+
+
+df_team=pd.DataFrame({"venue":venue,"win_count":lst})
+#df_team
+
+
+fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title="Win count at each stadium ")
+fig411.show()
+
+fig4101= px.sunburst(df_team, path=[ 
+                            'win_count',
+                            'venue'], 
+                  title="Win count at each stadium  ")
+fig4101.show()
+
+"""###5->probability of winning matches vs winning toss(plot for each team)"""
+
+ipl.head()
+
+df=ipl
+
+lst=list()
+for i in df['winner'].unique():
+  lst.append(i)
+lst=sorted(lst)
+print(lst)  #list of teams in alphabetical order
+
+x2=df['team1'].value_counts().sort_index(ascending=True)
+x3=df['team2'].value_counts().sort_index(ascending=True)
+
+lst_2=list()
+for i in range(14):
+  temp=x2[i]+x3[i]
+  lst_2.append(temp)
+
+print(len(lst_2))   #list of total matches played by teams
+
+y=df['winner'].value_counts().sort_index(ascending=True)
+
+lst3=list()
+for i in range(14):
+  lst3.append(y[i])
+lst3  #list of total games won
+
+x=pd.DataFrame({"winner":df['winner'],"toss_winner":df['toss_winner'],"toss_decision":df['toss_decision']})
+y=x['toss_winner'].value_counts().sort_index(ascending=True)
+y
+
+new_list=list()
+df1=ipl
+yy=df1['toss_winner'].value_counts().sort_index(ascending=True)
+yy
+for i in range(14):
+  new_list.append(yy[i])
+new_list
+
+df2=ipl
+x1=pd.DataFrame({"winner":df2['winner'],"toss_winner":df2['toss_winner']})
+
+x2=x1.reset_index(drop=True)
+x2
+
+lst_toss_win=list()
+for i in lst:
+  temp=0
+  for k in range(752):
+    if x2['winner'][k]==i and x2['toss_winner'][k]==i:
+      temp+=1
+    else:
+      pass
+  lst_toss_win.append(temp)
+lst_toss_win  #list of winning when toss won
+
+win_percent=list()
+win=0
+for i in range(14):
+    win=(lst_toss_win[i]/new_list[i])*100
+    win_percent.append(win)
+win_percent
+
+win_percent_toss=pd.DataFrame({"Team":lst,"Total_matches_played":lst_2,"Total_matches_won":lst3,"no:times toss won":new_list,
+                               "no:times won when toss won":lst_toss_win,"Win_match_toss_%":win_percent})
+win_percent_toss
+
+fig_all= px.sunburst(win_percent_toss, path=['Win_match_toss_%',
+                            'no:times toss won',
+                            'Team'] ,
+                 title="Win% chart \n outer circle:Team Name\n2nd circle:No: of times toss won\ninner circle: Win percentage when toss is won" )
+fig_all.show()
+
+df=win_percent_toss
+fig1=px.bar(df,x=df['Team'],y='Win_match_toss_%',color='no:times toss won')
+fig1.show()
+
+"""##dash"""
+USERNAME_PASSWORD_PAIRS=[['guvi','guvi']]
+app=dash.Dash(__name__)
+auth= dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
+server=app.server
+
+app.layout=html.Div([
+                     
+   html.H1(children='Hello Fan!!!',
+           style={"textAlign": "center",
+                  'color':'#8A2BE2',
+                  'background-color':'#FFA07A',
+                  'font-size':'300%'
+                  }),
+ 
+   html.H2(children='''
+       Welcome to the IPL Analysis:.
+   ''',
+   style={"textAlign": "center",
+          'color':'#00FF7F'
+   }),
+   html.Div([
+   #html.Label("Please select any option"),
+        dcc.Dropdown(
+         id='FirstDropdown',
+         options=[
+                {'label':"Best teams based on winning count(1 plot)",'value':'v1'},
+                {'label':"Best player based on player of the match(1 plot)",'value':'v2'},
+                {'label':"best winning teams based on the win by runs and win by wickets",'value':'v3'},
+                {'label':"Luckiest venue for each team)",'value':'v4'},
+                {'label':"probability of winning matches vs winning toss",'value':'v5'}
+                  
+         ],
+         placeholder="Please choose an option",
+         value='v1'
+         ),
+         html.Div(dcc.Graph(id='graph'))
+   ])
+                                      
+])
+
+@app.callback(
+    Output('graph','figure'),
+    [Input(component_id='FirstDropdown',component_property='value')]
+)
+def select_graph(value):
+
+  if value=='v1':
+    return fig11
+  elif value=='v2':
+    return fig21
+  elif value=='v3':
+    return fig31
+  elif value=='v4':
+    return fig411
+  else:
+    return fig_all
+
+if __name__ == '__main__':
+   app.run_server(debug=True)
+
+
+
