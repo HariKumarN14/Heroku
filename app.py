@@ -165,7 +165,7 @@ fig31.show()
 fig32= px.sunburst(win_list, path=['MAX_win_by_wickets', 
                             'MAX_win_by_runs',
                             'Team'], 
-                  title="Max wickets by which each team has won"
+                  title="outer circle: Team,   2nd circle:Max runs by which won,      Inner circle:Max wickets by which won"
                   )
 fig32.show()
 
@@ -430,7 +430,7 @@ def select_graph(value,value1):
   elif value=='v2':
     return fig21
   elif value=='v3':
-    return fig31
+    return fig32
   elif value=='v4':
     team=str(value1)
     fig=favorite(team)
