@@ -388,9 +388,9 @@ app.layout=html.Div([
           html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/Hari_IPL/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),           
    html.H2(children='Hello Fan!!!',
            style={"textAlign": "center",
-                  'color':'orangered',
-                  'background-color':'#4F91CD',
-                  'font-size':'300%'
+                  'color':'#19388A',
+                  'background-color':'white',
+                  'font-size':'200%'
                   }),
  
    html.H2(children='''
