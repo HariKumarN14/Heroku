@@ -370,7 +370,7 @@ server=app.server
 
 app.layout=html.Div([
           
-          html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),           
+          html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/Hari_IPL/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),           
    html.H1(children='Hello Fan!!!',
            style={"textAlign": "center",
                   'color':'#8A2BE2',
