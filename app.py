@@ -100,7 +100,7 @@ print(lst2)
 winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})         #creating new dataframe with wincounts
 winner_list
 
-fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="<b>Win Count of All teams across all seasons")
 fig11.show()
 
 
@@ -202,8 +202,9 @@ def favorite(team):
     lst.append(x[i])
 
   df_team=pd.DataFrame({"venue":venue,"win_count":lst})
-
-  fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title="Win count at each stadium ")
+  title="<b>Win count at each stadium for </b>:"+team
+  fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title=title)
+  
   return fig411
 
 
@@ -340,6 +341,9 @@ x=sorted(x)
 import plotly.graph_objects as go
 win=(3,1,0,0,0,0,0,2,4,0,1,0,0,1)
 df=win_percent_toss
+rowEvenColor = '#4F75CD'
+rowOddColor = '#4F91CD'
+
 fig_stats = go.Figure(data=[go.Table
                           (
                         header=dict(values=['Team', 'Total_matches(All_Seasons','Total_Wins(All_Seasons','N0: of IPL Trophies won'],
@@ -350,7 +354,7 @@ fig_stats = go.Figure(data=[go.Table
                         cells=dict(values=[df['Team'], df['Total_matches_played'],df['Total_matches_won'],win],
                                    font=dict(color='white', size=12),
                                     line_color='black',
-                                    fill_color='#4F91CD',
+                                    fill_color=[[rowOddColor,rowEvenColor,rowOddColor,rowEvenColor]*4],
                                    height=30)
                         )
                      ])
