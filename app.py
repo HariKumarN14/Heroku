@@ -69,17 +69,17 @@ ipl  #cleaned dataset
 
 """## plotly
 
-#def logo(fig):
-  #fig.add_layout_image(
- #     dict(
-  #        source="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/ipl.jpg",
-  #        xref="paper", yref="paper",
-   #       x=1, y=1.05,
-   #       sizex=0.3, sizey=0.3,
-   #       xanchor="left", yanchor="bottom"
-   #   )
-#  )  
- # return fig
+def logo(fig):
+  fig.add_layout_image(
+      dict(
+          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/ipl.jpg",
+          xref="paper", yref="paper",
+          x=1, y=1.05,
+          sizex=0.3, sizey=0.3,
+          xanchor="left", yanchor="bottom"
+      )
+  )  
+  return fig
 
 ###1-->Best teams based on winning count(1 plot)
 """
