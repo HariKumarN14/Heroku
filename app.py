@@ -374,6 +374,9 @@ auth= dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 server=app.server
 
 app.layout=html.Div([
+    html.Img(src="https://wallpapercave.com/dwp1x/wp7104495.jpg",width="600" ,height="150"),
+
+            ([
                      
    html.H1(children='Hello Fan!!!',
            style={"textAlign": "center",
