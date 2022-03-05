@@ -67,7 +67,7 @@ df2.info()
 ipl=df2
 ipl  #cleaned dataset
 
-"""## plotly
+
 
 def logo(fig):
   fig.add_layout_image(
@@ -81,8 +81,7 @@ def logo(fig):
   )  
   return fig
 
-###1-->Best teams based on winning count(1 plot)
-"""
+
 
 df=ipl
 
@@ -141,6 +140,8 @@ x=df['player_of_match'].value_counts().sort_index(ascending=True)
 x.shape
 
 fig21=px.histogram(df,x="player_of_match",color='player_of_match')
+
+fig21=logo(fig21)
 fig21.show()
 
 
@@ -181,6 +182,7 @@ fig32= px.sunburst(win_list, path=['MAX_win_by_wickets',
                             'Team'], 
                   title="outer circle: Team,   2nd circle:Max runs by which won,      Inner circle:Max wickets by which won"
                   )
+fig32=logo(fig32)
 fig32.show()
 
 """####Best team by win by most wickets"""
@@ -216,6 +218,7 @@ def favorite(team):
   df_team=pd.DataFrame({"venue":venue,"win_count":lst})
 
   fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title="Win count at each stadium ")
+  fig411=logo(fig411)
   return fig411
 
 
@@ -338,6 +341,7 @@ fig_all= px.sunburst(win_percent_toss, path=['Win_match_toss_%',
                             'no:times toss won',
                             'Team'] ,
                  title="Win% chart \n outer circle:Team Name\n2nd circle:No: of times toss won\ninner circle: Win percentage when toss is won" )
+fig_all=logo(fig_all)
 fig_all.show()
 
 df=win_percent_toss
@@ -365,7 +369,7 @@ fig_stats = go.Figure(data=[go.Table
                         )
                      ])
 
-
+fig_stats=logo(fig_stats)
 
 
 """##dash"""
