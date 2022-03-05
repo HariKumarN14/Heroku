@@ -374,7 +374,7 @@ app.layout=html.Div([
    html.H1(children='Hello Fan!!!',
            style={"textAlign": "center",
                   'color':'#8A2BE2',
-                  'background-color':'#FFA07A',
+                  'background-color':'#4F91CD',
                   'font-size':'300%'
                   }),
  
@@ -383,7 +383,7 @@ app.layout=html.Div([
    ''',
    style={"textAlign": "center",
           'color':'#E6E6FA',
-          'background-color':'#7B68EE'
+          'background-color':'#19388A'
    }),
    html.Div([
    #html.Label("Please select any option"),
