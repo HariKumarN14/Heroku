@@ -67,10 +67,21 @@ df2.info()
 ipl=df2
 ipl  #cleaned dataset
 
-"""## plotly
 
-###1-->Best teams based on winning count(1 plot)
-"""
+def logo(fig):
+  fig.add_layout_image(
+      dict(
+          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/Hari_IPL/docs/assets/ipl.jpg",
+          xref="paper", yref="paper",
+          x=.5, y=1.05,
+          sizex=0.3, sizey=0.3,
+          xanchor="left", yanchor="bottom"
+      )
+  )  
+  return fig
+
+
+
 
 df=ipl
 
@@ -101,6 +112,7 @@ winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})       
 winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="<b>Win Count of All teams across all seasons")
+fig11=logo(fig11)
 fig11.show()
 
 
@@ -127,6 +139,7 @@ x=df['player_of_match'].value_counts().sort_index(ascending=True)
 x.shape
 
 fig21=px.histogram(df,x="player_of_match",color='player_of_match')
+fig21=logo(fig21)
 fig21.show()
 
 
@@ -169,6 +182,7 @@ fig32= px.sunburst(win_list, path=['MAX_win_by_wickets',
                  "<i><b>Second circle</i>: Max runs by which team has won<br>"+
                  "<i><b>Inner circle</i>:   Max wickets by which team has won" 
                   )
+fig32=logo(fig32)
 fig32.show()
 
 """####Best team by win by most wickets"""
@@ -204,7 +218,7 @@ def favorite(team):
   df_team=pd.DataFrame({"venue":venue,"win_count":lst})
   title="<b>Win count at each stadium for </b>:"+team
   fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title=title)
-  
+  fig411=logo(fig411)
   return fig411
 
 
@@ -329,6 +343,7 @@ fig_all= px.sunburst(win_percent_toss, path=['Win_match_toss_%',
                  title="<b>Win% chart</b>(click to interact with chart)<br><br></b>"+"<i><b>Outer circle</i>:   Team Name<br>"+
                  "<i><b>Second circle</i>: No:of times toss won<br>"+
                  "<i><b>Inner circle</i>:   Win percentage when toss is won" )
+fig_all=logo(fig_all)
 fig_all.show()
 
 df=win_percent_toss
@@ -358,7 +373,7 @@ fig_stats = go.Figure(data=[go.Table
                                    height=30)
                         )
                      ])
-
+fig_stats=logo(fig_stats)
 
 
 
