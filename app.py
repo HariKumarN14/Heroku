@@ -114,6 +114,7 @@ winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
 fig11=logo(fig11)
+fig_temp=fig11
 fig11.show()
 
 
@@ -442,7 +443,7 @@ def select_graph(value,value1):
   if value=='v':
     return fig_stats
   if value=='v1':
-    return fig11
+    return fig_temp
   elif value=='v2':
     return fig21
   elif value=='v3':
