@@ -69,6 +69,18 @@ ipl  #cleaned dataset
 
 """## plotly
 
+def logo(fig):
+  fig.add_layout_image(
+      dict(
+          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/main/ipl.jpg",
+          xref="paper", yref="paper",
+          x=1, y=1.05,
+          sizex=0.3, sizey=0.3,
+          xanchor="left", yanchor="bottom"
+      )
+  )  
+  return fig
+
 ###1-->Best teams based on winning count(1 plot)
 """
 
@@ -101,20 +113,24 @@ winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})       
 winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig11=logo(fig11)
 fig11.show()
 
 
 
 fig12=px.scatter(winner_list,x="Team",y="Win_count",size="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig12=logo(fig12)
 fig12.show()
 
 fig13= px.pie(winner_list, values="Win_count",names="Team",color="Total_matches",title="Win Count of All teams across all seasons",)
+fig13=logo(fig13)
 fig13.show()
 
 fig14= px.sunburst(winner_list, path=['Win_count', 
                             'Total_matches',
                             'Team'], 
                   values='Win_count')
+fig14=logo(fig14)
 fig14.show()
 
 
@@ -127,6 +143,7 @@ x=df['player_of_match'].value_counts().sort_index(ascending=True)
 x.shape
 
 fig21=px.histogram(df,x="player_of_match",color='player_of_match')
+fig21=logo(fig21)
 fig21.show()
 
 
@@ -167,6 +184,7 @@ fig32= px.sunburst(win_list, path=['MAX_win_by_wickets',
                             'Team'], 
                   title="outer circle: Team,   2nd circle:Max runs by which won,      Inner circle:Max wickets by which won"
                   )
+fig32=logo(fig32)
 fig32.show()
 
 """####Best team by win by most wickets"""
@@ -202,6 +220,7 @@ def favorite(team):
   df_team=pd.DataFrame({"venue":venue,"win_count":lst})
 
   fig411=px.bar(df_team,x="win_count",y="venue",color="venue",title="Win count at each stadium ")
+  fig411=logo(fig411)
   return fig411
 
 
@@ -324,6 +343,7 @@ fig_all= px.sunburst(win_percent_toss, path=['Win_match_toss_%',
                             'no:times toss won',
                             'Team'] ,
                  title="Win% chart \n outer circle:Team Name\n2nd circle:No: of times toss won\ninner circle: Win percentage when toss is won" )
+fig_all=logo(fig_all)
 fig_all.show()
 
 df=win_percent_toss
@@ -351,7 +371,7 @@ fig_stats = go.Figure(data=[go.Table
                         )
                      ])
 
-
+fig_stats=logo(fig_stats)
 
 
 """##dash"""
