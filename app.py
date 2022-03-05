@@ -72,7 +72,7 @@ ipl  #cleaned dataset
 #def logo(fig):
   #fig.add_layout_image(
  #     dict(
-  #        source="https://raw.githubusercontent.com/HariKumarN14/Heroku/main/ipl.jpg",
+  #        source="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/ipl.jpg",
   #        xref="paper", yref="paper",
    #       x=1, y=1.05,
    #       sizex=0.3, sizey=0.3,
