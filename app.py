@@ -69,6 +69,18 @@ ipl  #cleaned dataset
 
 """## plotly
 
+def logo(fig):
+  fig.add_layout_image(
+      dict(
+          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/main/ipl.jpg",
+          xref="paper", yref="paper",
+          x=1, y=1.05,
+          sizex=0.3, sizey=0.3,
+          xanchor="left", yanchor="bottom"
+      )
+  )  
+  return fig
+
 ###1-->Best teams based on winning count(1 plot)
 """
 
@@ -101,6 +113,7 @@ winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})       
 winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig11=logo(fig11)
 fig11.show()
 
 
