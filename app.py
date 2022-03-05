@@ -113,7 +113,7 @@ winner_list=pd.DataFrame({"Team":y,"Win_count":lst,"Total_matches":lst2})       
 winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
-#fig11=logo(fig11)
+fig11=logo(fig11)
 fig11.show()
 
 
