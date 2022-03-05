@@ -72,7 +72,7 @@ ipl  #cleaned dataset
 def logo(fig):
   fig.add_layout_image(
       dict(
-          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/docs/assets/ipl.jpg",
+          source="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",
           xref="paper", yref="paper",
           x=1, y=1.05,
           sizex=0.3, sizey=0.3,
@@ -114,8 +114,8 @@ winner_list
 
 fig11=px.bar(winner_list,x="Team",y="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
 fig11=logo(fig11)
-fig_temp=fig11
-fig11.show()
+
+
 
 
 
@@ -443,9 +443,10 @@ def select_graph(value,value1):
   if value=='v':
     return fig_stats
   if value=='v1':
-    return fig_temp
+    return fig12
   elif value=='v2':
-    return fig21
+    figs=logo(fig21)
+    return figs
   elif value=='v3':
     return fig32
   elif value=='v4':
