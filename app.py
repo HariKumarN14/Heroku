@@ -165,7 +165,9 @@ fig31.show()
 fig32= px.sunburst(win_list, path=['MAX_win_by_wickets', 
                             'MAX_win_by_runs',
                             'Team'], 
-                  title="outer circle: Team,   2nd circle:Max runs by which won,      Inner circle:Max wickets by which won"
+                  title="<b>Win Chart:  Max runs and max wickets</b>(click to interact with chart)<br><br></b>"+"<i><b>Outer circle</i>:   Team Name<br>"+
+                 "<i><b>Second circle</i>: Max runs by which team has won<br>"+
+                 "<i><b>Inner circle</i>:   Max wickets by which team has won" 
                   )
 fig32.show()
 
@@ -323,7 +325,9 @@ win_percent_toss
 fig_all= px.sunburst(win_percent_toss, path=['Win_match_toss_%',
                             'no:times toss won',
                             'Team'] ,
-                 title="Win% chart \n outer circle:Team Name\n2nd circle:No: of times toss won\ninner circle: Win percentage when toss is won" )
+                 title="<b>Win% chart</b>(click to interact with chart)<br><br></b>"+"<i><b>Outer circle</i>:   Team Name<br>"+
+                 "<i><b>Second circle</i>: No:of times toss won<br>"+
+                 "<i><b>Inner circle</i>:   Win percentage when toss is won" )
 fig_all.show()
 
 df=win_percent_toss
