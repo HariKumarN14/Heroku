@@ -447,21 +447,37 @@ app.layout=html.Div([
                     value='Chennai Super Kings'
                   )
   ]),
+      html.P("Select an animation:"),
+    dcc.RadioItems(
+        id='selection',
+        options=[{'label': 'Bar', 'value':1},{'label': 'Scatter', 'value':2},{'label': 'Pie', 'value':3},{'label': 'Sunburst', 'value':4}],
+        value='Bar'
+    ),
          dash.html.Div(id="graph_container")
                                       
 ])
 
 @app.callback(
     Output("graph_container", "children"),
-    [Input('FirstDropdown','value')],[Input('Teams','value')],
+    [Input('FirstDropdown','value')],[Input('Teams','value')],[Input("selection", "value")],
 )
-def select_graph(value,value1):
+def select_graph(value,value1,value2):
   if value=='v':
     encoded=dwnload(fig_stats)
     return dash.dcc.Graph(figure=fig_stats),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   if value=='v1':
-    encoded=dwnload(fig11)
-    return dash.dcc.Graph(figure=fig11),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    if value2==1:
+          encoded=dwnload(fig11)
+          return dash.dcc.Graph(figure=fig11),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    if value2==2:
+          encoded=dwnload(fig12)
+          return dash.dcc.Graph(figure=fig12),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    if value2==3:
+          encoded=dwnload(fig13)
+          return dash.dcc.Graph(figure=fig13),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    if value2==4:
+          encoded=dwnload(fig14)
+          return dash.dcc.Graph(figure=fig14),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v2':
     encoded=dwnload(fig21)
     return dash.dcc.Graph(figure=fig21),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
