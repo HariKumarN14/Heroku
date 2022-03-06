@@ -430,6 +430,7 @@ app.layout=html.Div([
                   
          ],
          placeholder="Please choose an option",
+         searchable=False,
          value='v'
          )
    ]),
@@ -447,6 +448,7 @@ app.layout=html.Div([
                        {'label':'Sunrisers Hyderabad','value':'Sunrisers Hyderabad'}
                        ],
                       placeholder="Please choose an option",
+                      searchable=False,
                     value='Chennai Super Kings'
                   )
   ]),
