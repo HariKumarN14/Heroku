@@ -401,7 +401,7 @@ app.layout=html.Div([
           'background-color':'#19388A'
    }),
    html.Div([
-   #html.Label("Please select any option"),
+   html.Label("Please select any option from 1-7"),
         dcc.Dropdown(
          id='FirstDropdown',
          options=[
@@ -410,7 +410,8 @@ app.layout=html.Div([
                 {'label':"3. Best player based on player of the match",'value':'v2'},
                 {'label':"4. Best winning teams based on the win by runs and win by wickets",'value':'v3'},
                 {'label':"5. Luckiest venue for each team",'value':'v4'},
-                {'label':"6. Probability of winning matches vs winning toss",'value':'v5'}
+                {'label':"6. Probability of winning matches vs winning toss",'value':'v5'},
+                 {'label':"7. Rate the Analysis app",'value':'v6'}
                   
          ],
          placeholder="Please choose an option",
