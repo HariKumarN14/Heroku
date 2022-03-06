@@ -10,6 +10,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+import io
+from base64 import b64encode
+
 df=pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 
 """## Cleaning"""
@@ -371,6 +374,15 @@ fig_stats = go.Figure(data=[go.Table
 
 fig_stats=logo(fig_stats)
 
+temp_fig=fig_stats
+buffer = io.StringIO()
+temp_fig.write_html(buffer,
+                full_html=False,
+                include_plotlyjs='cdn')
+
+html_bytes = buffer.getvalue().encode()
+encoded = b64encode(html_bytes).decode()
+
 
 """##dash"""
 USERNAME_PASSWORD_PAIRS=[['guvi','guvi']]
@@ -443,7 +455,11 @@ app.layout=html.Div([
 )
 def select_graph(value,value1):
   if value=='v':
-    return dash.dcc.Graph(figure=fig_stats)
+    return dash.dcc.Graph(figure=fig_stats),html.A(
+        html.Button("Download HTML"), 
+        id="download",
+        href="data:text/html;base64," + encoded,
+        download="IPL_stats(2008-2019).html")
   if value=='v1':
     return dash.dcc.Graph(figure=fig11)
   elif value=='v2':
