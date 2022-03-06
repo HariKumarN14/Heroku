@@ -434,33 +434,40 @@ app.layout=html.Div([
                     value='Chennai Super Kings'
                   )
   ]),
-         html.Div([
-             dcc.Graph(id='graph')
-   ])
+         dash.html.Div(id="graph_container")
                                       
 ])
 
 @app.callback(
-    Output('graph','figure'),
-    [Input('FirstDropdown','value')],[Input('Teams','value')]
-    
+    Output("graph_container", "children"),
+    [Input('FirstDropdown','value')],[Input('Teams','value')],
 )
 def select_graph(value,value1):
-
   if value=='v':
-    return fig_stats
+    return dash.dcc.Graph(figure=fig_stats)
   if value=='v1':
-    return fig11
+    return dash.dcc.Graph(figure=fig11)
   elif value=='v2':
-    return fig21
+    return dash.dcc.Graph(figure=fig21)
   elif value=='v3':
-    return fig32
+    return dash.dcc.Graph(figure=fig31)
   elif value=='v4':
     team=str(value1)
     fig=favorite(team)
-    return fig
-  else:
-    return fig_all
+    return dash.dcc.Graph(figure=fig)
+  elif value=='v5':
+    return dash.dcc.Graph(figure=fig_all)
+  elif value=='v6':
+    return html.H1(children='Please fill the Google Form below.......THANKYOU!!!!!',
+           style={"textAlign": "center",
+                  'color':'#19388A',
+                  'background-color':'white',
+                  'font-size':'200%'
+                  }),html.Iframe(
+            width="1000px",
+            height="947px",
+            src="https://docs.google.com/forms/d/e/1FAIpQLScdNtNMVIWqwddi3Q_1QvsP_qW-Pq8tamh4HzJphXYi-opwlQ/viewform?embedded=true",
+        )
 
 
 
