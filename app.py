@@ -10,6 +10,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
+
+import io
+from base64 import 
+
 df=pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 
 """## Cleaning"""
@@ -80,8 +84,16 @@ def logo(fig):
   )  
   return fig
 
+def dwnload(fig):
+  temp_fig=fig
+  buffer = io.StringIO()
+  temp_fig.write_html(buffer,
+                  full_html=False,
+                  include_plotlyjs='cdn')
 
-
+  html_bytes = buffer.getvalue().encode()
+  encoded = b64encode(html_bytes).decode()
+  return encoded
 
 df=ipl
 
@@ -445,19 +457,25 @@ app.layout=html.Div([
 )
 def select_graph(value,value1):
   if value=='v':
-    return dash.dcc.Graph(figure=fig_stats)
+    encoded=dwnload(fig_stats)
+    return dash.dcc.Graph(figure=fig_stats),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   if value=='v1':
-    return dash.dcc.Graph(figure=fig11)
+    encoded=dwnload(fig11)
+    return dash.dcc.Graph(figure=fig11),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v2':
-    return dash.dcc.Graph(figure=fig21)
+    encoded=dwnload(fig21)
+    return dash.dcc.Graph(figure=fig21),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v3':
-    return dash.dcc.Graph(figure=fig31)
+    encoded=dwnload(fig32)
+    return dash.dcc.Graph(figure=fig32),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v4':
     team=str(value1)
     fig=favorite(team)
-    return dash.dcc.Graph(figure=fig)
+    encoded=dwnload(fig)
+    return dash.dcc.Graph(figure=fig),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v5':
-    return dash.dcc.Graph(figure=fig_all)
+    encoded=dwnload(fig_all)
+    return dash.dcc.Graph(figure=fig_all),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
   elif value=='v6':
     return html.H1(children='Please fill the Google Form below.......THANKYOU!!!!!',
            style={"textAlign": "center",
