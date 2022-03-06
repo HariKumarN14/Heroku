@@ -130,15 +130,18 @@ fig11.show()
 
 
 fig12=px.scatter(winner_list,x="Team",y="Win_count",size="Win_count",color="Total_matches",title="Win Count of All teams across all seasons")
+fig12=logo(fig12)
 fig12.show()
 
 fig13= px.pie(winner_list, values="Win_count",names="Team",color="Total_matches",title="Win Count of All teams across all seasons",)
+fig13=logo(fig13)
 fig13.show()
 
 fig14= px.sunburst(winner_list, path=['Win_count', 
                             'Total_matches',
                             'Team'], 
                   values='Win_count')
+fig14=logo(fig14)
 fig14.show()
 
 
