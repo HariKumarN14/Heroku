@@ -12,7 +12,7 @@ from dash.dependencies import Input, Output
 
 
 import io
-from base64 import 
+from base64 import b64encode
 
 df=pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 
