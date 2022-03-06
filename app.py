@@ -407,7 +407,8 @@ app.layout=html.Div([
                 {'label':"3. Best player based on player of the match",'value':'v2'},
                 {'label':"4. Best winning teams based on the win by runs and win by wickets",'value':'v3'},
                 {'label':"5. Luckiest venue for each team",'value':'v4'},
-                {'label':"6. Probability of winning matches vs winning toss",'value':'v5'}
+                {'label':"6. Probability of winning matches vs winning toss",'value':'v5'},
+                   {'label':"7. Rate the Analysis app",'value':'v6'}
                   
          ],
          placeholder="Please choose an option",
@@ -432,13 +433,13 @@ app.layout=html.Div([
                   )
   ]),
          dash.html.Div(id="graph_container")
-   ])
+   
                                       
 ])
 
 @app.callback(
     Output("graph_container", "children"),
-    Input("FirstDropdown", "value"),
+    [Input('FirstDropdown','value')],[Input('Teams','value')],
 )
 def select_graph(value,value1):
   if value=='v':
