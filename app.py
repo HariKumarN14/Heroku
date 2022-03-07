@@ -455,11 +455,23 @@ app.layout=html.Div([
 )
 def select_graph(value,value1):
   if value=='v':
-    return dash.dcc.Graph(figure=fig_stats),html.A(
-        html.Button("Download HTML"), 
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+   style={
+  'background-color': '#4CAF50',
+  'width': '250px',
+  'border': '2px solid #4CAF50',
+  'color': 'white',
+  'padding': '10px 24px',
+  'text-align': 'center',
+  'text-decoration': 'none',
+  'border-radius': '12px',
+  'font-size': '12px',
+
+                  })), 
         id="download",
         href="data:text/html;base64," + encoded,
-        download="IPL_stats(2008-2019).html")
+        download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig_stats)
   if value=='v1':
     return dash.dcc.Graph(figure=fig11)
   elif value=='v2':
