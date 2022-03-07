@@ -482,42 +482,42 @@ def select_graph(value,value1,value2):
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig11)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig11)
     if value2==2:
           encoded=dwnload(fig12)
           return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig12)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig12)
     if value2==3:
           encoded=dwnload(fig13)
           return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig13)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig13)
     if value2==4:
           encoded=dwnload(fig14)
           return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig14)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig14)
   elif value=='v2':
     encoded=dwnload(fig21)
     return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig21)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig21)
   elif value=='v3':
     encoded=dwnload(fig32)
     return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig32)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig32)
   elif value=='v4':
     team=str(value1)
     fig=favorite(team)
@@ -526,14 +526,14 @@ def select_graph(value,value1,value2):
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig)
   elif value=='v5':
     encoded=dwnload(fig_all)
     return html.A(
         html.Button(html.H2(children="Download Graph",
                             style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
                                    'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
-              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig_all)
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig_all)
   elif value=='v6':
     return html.H1(children='Please fill the Google Form below.......THANKYOU!!!!!',
            style={"textAlign": "center",
