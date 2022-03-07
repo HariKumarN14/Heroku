@@ -400,7 +400,8 @@ server=app.server
 
 app.layout=html.Div([
           
-          html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/Hari_IPL/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),           
+          html.A(html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/Hari_IPL/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),
+          href="https://www.iplt20.com/",target='_blank'),
    html.H2(children='Hello Fan!!!',
            style={"textAlign": "center",
                   'color':'#19388A',
@@ -469,34 +470,70 @@ app.layout=html.Div([
 def select_graph(value,value1,value2):
   if value=='v':
     encoded=dwnload(fig_stats)
-    return dash.dcc.Graph(figure=fig_stats),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,download="IPL_stats(2008-2019).html"),dash.dcc.Graph(figure=fig_stats)
   if value=='v1':
     if value2==1:
           encoded=dwnload(fig11)
-          return dash.dcc.Graph(figure=fig11),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+          return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig11)
     if value2==2:
           encoded=dwnload(fig12)
-          return dash.dcc.Graph(figure=fig12),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+          return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig12)
     if value2==3:
           encoded=dwnload(fig13)
-          return dash.dcc.Graph(figure=fig13),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+          return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig13)
     if value2==4:
           encoded=dwnload(fig14)
-          return dash.dcc.Graph(figure=fig14),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+          return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig14)
   elif value=='v2':
     encoded=dwnload(fig21)
-    return dash.dcc.Graph(figure=fig21),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig21)
   elif value=='v3':
     encoded=dwnload(fig32)
-    return dash.dcc.Graph(figure=fig32),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig32)
   elif value=='v4':
     team=str(value1)
     fig=favorite(team)
     encoded=dwnload(fig)
-    return dash.dcc.Graph(figure=fig),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig)
   elif value=='v5':
     encoded=dwnload(fig_all)
-    return dash.dcc.Graph(figure=fig_all),html.A(html.Button("Download Graph"), id="download",href="data:text/html;base64," + encoded,download="hari-ipl-analysis_graph.html")
+    return html.A(
+        html.Button(html.H2(children="Download Graph",
+                            style={'background-color': '#4CAF50','width': '250px','border': '2px solid #4CAF50','color': 'white','padding': '10px 24px',
+                                   'text-align': 'center','text-decoration': 'none','border-radius': '12px','font-size': '12px',})), id="download",
+              href="data:text/html;base64," + encoded,dash.dcc.Graph(figure=fig_all)
   elif value=='v6':
     return html.H1(children='Please fill the Google Form below.......THANKYOU!!!!!',
            style={"textAlign": "center",
