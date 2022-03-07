@@ -391,7 +391,8 @@ auth= dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 server=app.server
 
 app.layout=html.Div([
-    html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),
+    html.A(html.Img(src="https://raw.githubusercontent.com/HariKumarN14/Heroku/har-ipl-trial/docs/assets/wp7104495-ipl-logo-wallpapers.jpg",width="600" ,height="150"),
+          href="https://www.iplt20.com/",target='_blank'),
 
             
                      
